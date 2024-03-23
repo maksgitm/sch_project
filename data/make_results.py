@@ -58,7 +58,7 @@ def get_results():
     driver.implicitly_wait(10)
     pages_num = int(driver.find_element(By.XPATH, pages_num_xpath).text)
     for i in range(pages_num):
-        time.sleep(3)
+        time.sleep(1)
         names = (driver.find_element(By.CLASS_NAME, 'esz-result-sections')
                  .find_elements(By.CLASS_NAME, 'esz-section-block'))
         for n, name in enumerate(names, 1):
