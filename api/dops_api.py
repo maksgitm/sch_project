@@ -19,7 +19,6 @@ def create_dop():
     db_sess = db_session.create_session()
     db_sess.query(Dops).delete()
     data = get_results()
-    print(data)
     if data:
         for el in data:
             link = el['link']
