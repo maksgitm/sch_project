@@ -26,7 +26,7 @@ def bad_request(_):
 @app.route('/')
 @app.route('/index')
 def start():
-    return render_template("сайт.html", title='Школа 1357')
+    return render_template("index.html", title='Школа 1357')
 
 
 @app.route('/кружки')
