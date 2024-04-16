@@ -55,7 +55,7 @@ th {
 	}
 .container1 {
 	display: flex;
-	width: 95%;
+	width: 100%;
 	justify-content: space-around;
 	padding-top: 20px;
 }

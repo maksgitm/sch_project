@@ -4,17 +4,28 @@
 {% block content %}
     <img id="img" src="{{ url_for('static', filename='images/school_img.jpg') }}" width="125" alt="1357" />
 	<img id="img1" src="{{ url_for('static', filename='images/school_img.jpg') }}" width="125" alt="1357" />
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <div class="container-fluid">
+		  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			  <div class="navbar-nav w-100 justify-content-center">
+				<a class="nav-link active" aria-current="page" href="/api/dops">Кружки</a>
+				<a class="nav-link" href="#">Мероприятия</a>
+				<a class="nav-link" href="#">Новости</a>
+			  </div>
+		  </div>
+	  </div>
+	</nav>
     <h2>Государственное бюджетное образовательное учреждение "Школа 1357 на Братиславской"</h2>
     <h3>На нашем сайте Вы можете узнать всю информацию о предстоящих мероприятиях в школе, расписании, кружках.</h3>
 	<div class="container1">
-		<div class="container2">
-			<p>Вы можете записаться на кружок в нашей школе:</p>
+<!--		<div class="container2">-->
+<!--			<p>Вы можете записаться на кружок в нашей школе:</p>-->
 <!--			<ul class="p">-->
-			    <form action="/кружки">
-			        <a class="btn btn-outline-primary" href="/api/dops" role="button">Записаться</a>
-			    </form>
+<!--			    <form action="/кружки">-->
+<!--			        <a class="btn btn-outline-primary" href="/api/dops" role="button">Записаться</a>-->
+<!--			    </form>-->
 <!--			</ul>-->
-		</div>
+<!--		</div>-->
 		<img id="build" src="{{ url_for('static', filename='images/building.jpg') }}" width="600" alt="школа 1357" />
 	</div>
 	<div class="vk_cont">
