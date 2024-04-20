@@ -19,25 +19,25 @@ blueprint = flask.Blueprint(
 @blueprint.route('/api/dops')
 def create_dop():
     db_sess = db_session.create_session()
-    db_sess.query(Dops).delete()
-    data = get_results()
-    if data:
-        for el in data:
-            link = el['link']
-            qr = qrcode.make(link)
-            qr.save('static/images/test_img.jpg')
-            f = open('static/images/test_img.jpg', 'rb')
-            file = f.read()
-            dop = Dops(
-                speciality=el['topic'],
-                name=el['name_'],
-                cost=el['cost'],
-                age=el['age'],
-                qr_code=file
-            )
-            f.close()
-            db_sess.add(dop)
-            db_sess.commit()
+    # db_sess.query(Dops).delete()
+    # data = get_results()
+    # if data:
+    #     for el in data:
+    #         link = el['link']
+    #         qr = qrcode.make(link)
+    #         qr.save('static/images/test_img.jpg')
+    #         f = open('static/images/test_img.jpg', 'rb')
+    #         file = f.read()
+    #         dop = Dops(
+    #             speciality=el['topic'],
+    #             name=el['name_'],
+    #             cost=el['cost'],
+    #             age=el['age'],
+    #             qr_code=file
+    #         )
+    #         f.close()
+    #         db_sess.add(dop)
+    #         db_sess.commit()
     lst_of_qrcodes = []
     db = db_sess.query(Dops).all()
     items = [item.to_dict(only=('speciality', 'name', 'cost', 'age')) for item in db]
