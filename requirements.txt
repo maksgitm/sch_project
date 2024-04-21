@@ -2,3 +2,6 @@ flask
 selenium
 sqlalchemy
 qrcode
+sqlalchemy-serializer
+flask-login
+urllib3==1.26.6

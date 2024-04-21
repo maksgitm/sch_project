@@ -1,8 +1,5 @@
-from base64 import b64encode
-
 import flask
 import qrcode
-from sqlalchemy_serializer import SerializerMixin
 from data import db_session
 from flask import jsonify, make_response, request, abort, render_template
 from data.dops import Dops

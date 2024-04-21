@@ -98,3 +98,12 @@ ul {
 	display: flex;
 	justify-content: center;
 }
+.carousel {
+    width: 80%;
+    margin: auto;
+    padding: 4%;
+    padding-top: 2%;
+    }
+.navbar {
+    margin-bottom: 2%;
+}

@@ -10,8 +10,8 @@ def get_results():
                     '/section[1]/div[2]/div[1]/div/div[2]/div[2]/div[1]/div/input')
     sch_btn_xpath = ('/html/body/div[4]/div/div[1]/div[3]/div[1]/form/div[3]/fieldset/'
                      'section[1]/div[2]/div[1]/div/div[1]')
-    sch_1357_xpath = ('/html/body/div[4]/div[2]/div[1]/div[3]/div[1]/form/div[3]'
-                      '/fieldset/section[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[512]')
+    sch_1357_xpath = ('/html/body/div[4]/div/div[1]/div[3]/div[1]/form/div[3]/fieldset/section[1]'
+                      '/div[2]/div[1]/div/div[2]/div[2]/div[2]/div/div[512]')
     pages_num_xpath = ('/html/body/div[4]/div/div[1]/div[3]/div[1]/form/div[3]/fieldset'
                        '/section[1]/div[3]/div[6]/div/div/ul/li[5]')
     next_page_selector = ('#step_1 > section.visual.visual_1 > div.esz-result-block > '
@@ -58,7 +58,7 @@ def get_results():
     driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
     driver.implicitly_wait(10)
     # pages_num = int(driver.find_element(By.XPATH, pages_num_xpath).text)
-    for i in range(3):
+    for i in range(2):
         time.sleep(1)
         names = (driver.find_element(By.CLASS_NAME, 'esz-result-sections')
                  .find_elements(By.CLASS_NAME, 'esz-section-block'))
@@ -77,7 +77,7 @@ def get_results():
                               By.XPATH, f'//*[@id="step_1"]/section[1]/div[3]/div[5]/div/div[{n}]/h3[2]').text,
                           'link': links_lst[1]}
             names_lst.append(names_dict)
-        if i != 2:
+        if i != 1:
             next_page_btn = driver.find_element(By.CSS_SELECTOR, next_page_selector)
             next_page_btn.click()
     driver.close()

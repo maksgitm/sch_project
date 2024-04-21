@@ -1,0 +1,6 @@
+{% extends 'admin/master.html' %}
+{% block body %}
+    {% if not current_user.is_authenticated %}
+        <h4>АЛЁ ТЫ КТО</h4>
+    {% endif %}
+{% endblock %}
