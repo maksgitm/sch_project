@@ -61,7 +61,7 @@ class MyView(ModelView):
         return make_response(jsonify({'ERROR': 'Forbidden'}), 403)
 
 
-admin.add_view(MyView(name='Hello', session=db_sess, model=Table, url='/'))
+admin.add_view(MyView(name='Hello', session=db_sess, model=Table, url='/add-data'))
 
 
 @app.errorhandler(404)
