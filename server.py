@@ -51,7 +51,7 @@ db_sess = db_session.create_session()
 class MyView(ModelView):
     form_extra_fields = {
         'image': form.ImageUploadField('Image',
-                                      base_path=file_path)
+                                       base_path=file_path)
     }
 
     def is_accessible(self):

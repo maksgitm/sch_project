@@ -5,3 +5,5 @@ qrcode
 sqlalchemy-serializer
 flask-login
 urllib3==1.26.6
+flask-admin
+flask-sqlalchemy
