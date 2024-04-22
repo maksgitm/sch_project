@@ -61,7 +61,7 @@ class MyView(ModelView):
         return make_response(jsonify({'ERROR': 'Forbidden'}), 403)
 
 
-admin.add_view(MyView(name='Hello', session=db_sess, model=Table, url='/admin/add_data'))
+admin.add_view(MyView(name='Hello', session=db_sess, model=Table, url='/'))
 
 
 @app.errorhandler(404)
@@ -78,6 +78,11 @@ def bad_request(_):
 @app.route('/index')
 def start():
     return render_template("index.html", title='Школа 1357')
+
+
+# @app.route('/admin')
+# def admin_1():
+#     return render_template("admin/index.html", title='Школа 1357')
 
 
 @app.route('/events')
