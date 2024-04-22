@@ -54,11 +54,11 @@ class MyView(ModelView):
                                        base_path=file_path)
     }
 
-    def is_accessible(self):
-        return current_user.is_authenticated
-
-    def not_auth(self):
-        return make_response(jsonify({'ERROR': 'Forbidden'}), 403)
+    # def is_accessible(self):
+    #     return current_user.is_authenticated
+    #
+    # def not_auth(self):
+    #     return make_response(jsonify({'ERROR': 'Forbidden'}), 403)
 
 
 admin.add_view(MyView(name='Hello', session=db_sess, model=Table, url='/add-data'))
