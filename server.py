@@ -1,5 +1,8 @@
 import os
 
+import flask
+from flask import Flask, render_template, url_for, make_response, jsonify, redirect
+# from flask_babel import Babel
 from flask_login import current_user, login_required, logout_user, LoginManager, login_user, UserMixin
 from sqlalchemy_serializer import SerializerMixin
 from data.db_session import SqlAlchemyBase
@@ -11,17 +14,21 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin, BaseView, expose, form
 from flask_admin.contrib.sqla import ModelView
 from api import dops_api
-from flask import Flask, render_template, url_for, make_response, jsonify, redirect
 from data import db_session
+from flask_babelex import Babel
 
 app = Flask(__name__)
+babel = Babel(app)
+
+
 app.config['SECRET_KEY'] = 'super_puper_secret_key_you_will_not_get_it'
 app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/sc1357_db_.sqlite'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/sch1357_db_.sqlite'
+app.config['BABEL_DEFAULT_LOCALE'] = 'ru'
 db = SQLAlchemy(app)
 file_path = 'C:/Users/Максим/PycharmProjects/sch_project/static/events'
 # def main():
-db_session.global_init("db/sc1357_db_.sqlite")
+db_session.global_init("db/sch1357_db_.sqlite")
 app.register_blueprint(dops_api.blueprint)
 
 login_manager = LoginManager()
@@ -43,25 +50,30 @@ class Table(db.Model, SqlAlchemyBase, UserMixin, SerializerMixin):
     image = sqlalchemy.Column(sqlalchemy.String)
 
 
-admin = Admin(app, name='admin', template_mode='bootstrap4')
+admin = Admin(app, name='Администратор', template_mode='bootstrap4')
 
 db_sess = db_session.create_session()
 
 
 class MyView(ModelView):
+    column_labels = {
+        'event': 'Название мероприятия',
+        'description': 'Описание',
+        'image': 'Фото'
+    }
     form_extra_fields = {
-        'image': form.ImageUploadField('Image',
+        'image': form.ImageUploadField('Фото',
                                        base_path=file_path)
     }
 
-    # def is_accessible(self):
-    #     return current_user.is_authenticated
-    #
+    def is_accessible(self):
+        return current_user.is_authenticated
+
     # def not_auth(self):
     #     return make_response(jsonify({'ERROR': 'Forbidden'}), 403)
 
 
-admin.add_view(MyView(name='Hello', session=db_sess, model=Table, url='/add-data'))
+admin.add_view(MyView(name='Мероприятия', session=db_sess, model=Table, url='/add-data'))
 
 
 @app.errorhandler(404)
@@ -91,24 +103,26 @@ def events():
     db_ = db_sess.query(Table).all()
     items = [item.to_dict(only=('event', 'description')) for item in db_]
     print(items)
+    num = len(items) - 1
+    print(num)
     images = db_sess.query(Table.image).all()
     images = [f"events/{image[0]}" for image in images]
     return render_template("events.html", title='Мероприятия', items=items, images=images,
-                           zip=zip)
+                           zip=zip, num=num)
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        # db_sess = db_session.create_session()
-        # user = db_sess.query(User).filter(User.name == form.username.data).first()
-        # if user and user.check_password(form.password.data):
-        #     login_user(user, remember=form.remember_me.data)
-        return redirect('/admin')
-        # return render_template('login.html',
-        #                        message="Неправильный логин или пароль",
-        #                        form=form)
+        db_sess = db_session.create_session()
+        user = db_sess.query(User).filter(User.name == form.username.data).first()
+        if user and user.check_password(form.password.data):
+            login_user(user, remember=form.remember_me.data)
+            return redirect('/admin')
+        return render_template('login.html',
+                               message="Неправильный логин или пароль",
+                               form=form)
     return render_template('login.html', title='Авторизация', form=form)
 
 

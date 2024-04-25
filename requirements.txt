@@ -1,4 +1,4 @@
-flask
+flask==2.3.3
 selenium
 sqlalchemy
 qrcode
@@ -8,3 +8,6 @@ urllib3==1.26.6
 flask-admin
 flask-sqlalchemy
 flask-wtf
+pillow
+flask-babelex
+flask-ext
