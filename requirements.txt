@@ -10,4 +10,3 @@ flask-sqlalchemy
 flask-wtf
 pillow
 flask-babelex
-flask-ext
